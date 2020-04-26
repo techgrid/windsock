@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta property="og:title" content="Windsock Aloft">
+    <meta property="og:description" content="Visual indicator for winds aloft">
+    <meta property="og:image" content="/apple-touch-icon.png">
+    <meta property="og:url" content="https://www.windsockaloft.com/">
+    <link rel="prefetch" href="/assets/images/0-arrow.png">
+    <link rel="prefetch" href="/assets/images/20-arrow.png">
+    <link rel="prefetch" href="/assets/images/40-arrow.png">
+    <link rel="prefetch" href="/assets/images/60-arrow.png">
+    <link rel="prefetch" href="/assets/images/80-arrow.png">
+    <link rel="prefetch" href="/assets/images/100-arrow.png">
+    <!--
+  ArcGIS API for JavaScript, https://js.arcgis.com
+  For more information about the widgets-basemapgallery sample, read the original sample description at developers.arcgis.com.
+  https://developers.arcgis.com/javascript/latest/sample-code/widgets-basemapgallery/index.html
+  -->
+    <title>Windsock</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://js.arcgis.com/4.15/"></script>
+</head>
+
+<body>
+    <div id="loading">
+        <img id="loading-image" src="assets/images/loader.gif  " alt="Loading..." />
+        <div class="break"></div> <!-- break to a new row -->
+        <div class="alert alert-danger" id="alert" role="alert">
+          Either Geolocation is not supported or not allowed in browser settings.
+        </div>
+    </div>
+    <div id="viewDiv"></div>
+    <img class="north" src="assets/images/north.png" alt="north"/>
+    <div class="altitude">
+        <button id="tableMode" type="button" class="btn btn-secondary" onclick="toggleTableView();">
+          <svg class="bi bi-table" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M15 4H1V3h14v1z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M5 15.5v-14h1v14H5zm5 0v-14h1v14h-1z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M15 8H1V7h14v1zm0 4H1v-1h14v1z" clip-rule="evenodd"/>
+          <path d="M0 2a2 2 0 012-2h12a2 2 0 012 2v2H0V2z"/>
+        </svg>
+        </button>
+        <input type="range" min="0" max="15000" step="1000" value="0" class="slider" id="altitudeSlider" orient="vertical" onchange="sliderChanged();">
+        <table id='altitudeTable' class="table table-hover table-dark" style="display: none">
+          <thead>
+            <tr>
+              <th scope="col">Altitude</th>
+              <th scope="col">Direction</th>
+              <th scope="col">Speed</th>
+            </tr>
+          </thead>
+          <tbody id="altitudeTableBody">
+          </tbody>
+        </table>
+    </div>
+    <div id="arrow" class="arrow arror-0"></div>
+    <div id="summary" class="summary">
+        <table class="table table-borderless table-dark">
+          <tbody>
+            <tr>
+              <th>Altitude</th>
+              <td><span id="altitudedisplay">0</span> ft</td>
+            </tr>
+            <tr>
+              <th>Speed</th>
+              <td><span class="w-30" id="speed">0</span> kts</td>
+            </tr>
+            <tr>
+              <th>Direction</th>
+              <td><span class="w-30" id="direction">0</span>º</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="copyright">&copy; Copyright 2020, Arpit Tyagi</div>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
